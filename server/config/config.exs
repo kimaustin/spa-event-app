@@ -10,6 +10,9 @@ use Mix.Config
 config :spa_event_app,
   ecto_repos: [SpaEventApp.Repo]
 
+config :spa_event_app,
+  mix_env: "#{Mix.env()}"
+
 # Configures the endpoint
 config :spa_event_app, SpaEventAppWeb.Endpoint,
   url: [host: "localhost"],
