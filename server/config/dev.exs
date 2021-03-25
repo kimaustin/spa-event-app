@@ -1,10 +1,10 @@
 use Mix.Config
 
 # Configure your database
-config :event_app, EventApp.Repo,
-  username: "postgres",
-  password: "postgres",
-  database: "event_app_dev",
+config :spa_event_app, SpaEventApp.Repo,
+  username: "spa_event_app",
+  password: "Phez5aing2li",
+  database: "spa_event_app_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
@@ -15,7 +15,7 @@ config :event_app, EventApp.Repo,
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
-config :event_app, EventAppWeb.Endpoint,
+config :spa_event_app, SpaEventAppWeb.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
@@ -47,13 +47,13 @@ config :event_app, EventAppWeb.Endpoint,
 # different ports.
 
 # Watch static and templates for browser reloading.
-config :event_app, EventAppWeb.Endpoint,
+config :spa_event_app, SpaEventAppWeb.Endpoint,
   live_reload: [
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
-      ~r"lib/event_app_web/(live|views)/.*(ex)$",
-      ~r"lib/event_app_web/templates/.*(eex)$"
+      ~r"lib/spa_event_app_web/(live|views)/.*(ex)$",
+      ~r"lib/spa_event_app_web/templates/.*(eex)$"
     ]
   ]
 
@@ -66,3 +66,8 @@ config :phoenix, :stacktrace_depth, 20
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
+
+config :cors_plug,
+  origin: ["http://localhost:3000"],
+  max_age: 86400,
+  methods: ["GET", "POST", "PATCH", "DELETE"]

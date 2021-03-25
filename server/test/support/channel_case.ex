@@ -1,4 +1,4 @@
-defmodule EventAppWeb.ChannelCase do
+defmodule SpaEventAppWeb.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -11,7 +11,7 @@ defmodule EventAppWeb.ChannelCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use EventAppWeb.ChannelCase, async: true`, although
+  by setting `use SpaEventAppWeb.ChannelCase, async: true`, although
   this option is not recommended for other databases.
   """
 
@@ -21,18 +21,18 @@ defmodule EventAppWeb.ChannelCase do
     quote do
       # Import conveniences for testing with channels
       import Phoenix.ChannelTest
-      import EventAppWeb.ChannelCase
+      import SpaEventAppWeb.ChannelCase
 
       # The default endpoint for testing
-      @endpoint EventAppWeb.Endpoint
+      @endpoint SpaEventAppWeb.Endpoint
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(EventApp.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(SpaEventApp.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(EventApp.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(SpaEventApp.Repo, {:shared, self()})
     end
 
     :ok

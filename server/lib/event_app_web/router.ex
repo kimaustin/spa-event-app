@@ -1,5 +1,5 @@
-defmodule EventAppWeb.Router do
-  use EventAppWeb, :router
+defmodule SpaEventAppWeb.Router do
+  use SpaEventAppWeb, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -13,14 +13,21 @@ defmodule EventAppWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", EventAppWeb do
-    pipe_through :browser
+  scope "/api/v1", SpaEventAppWeb do
+    pipe_through :api
 
     get "/", PageController, :index
+    get "/users/photo/:id", UserController, :photo
+    get "/events/photo/:id", EventController, :photo
+
+    resources "/users", UserController
+    resources "/events", EventController
+    resources "/comments", CommentController
+    resources "/invitations", InvitationController
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", EventAppWeb do
+  # scope "/api", SpaEventAppWeb do
   #   pipe_through :api
   # end
 
@@ -36,7 +43,7 @@ defmodule EventAppWeb.Router do
 
     scope "/" do
       pipe_through :browser
-      live_dashboard "/dashboard", metrics: EventAppWeb.Telemetry
+      live_dashboard "/dashboard", metrics: SpaEventAppWeb.Telemetry
     end
   end
 end

@@ -1,3 +1,3 @@
-defmodule EventAppWeb.LayoutView do
-  use EventAppWeb, :view
+defmodule SpaEventAppWeb.LayoutView do
+  use SpaEventAppWeb, :view
 end

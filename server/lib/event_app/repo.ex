@@ -1,5 +1,5 @@
-defmodule EventApp.Repo do
+defmodule SpaEventApp.Repo do
   use Ecto.Repo,
-    otp_app: :event_app,
+    otp_app: :spa_event_app,
     adapter: Ecto.Adapters.Postgres
 end

@@ -1,4 +1,4 @@
-defmodule EventAppWeb.Telemetry do
+defmodule SpaEventAppWeb.Telemetry do
   use Supervisor
   import Telemetry.Metrics
 
@@ -31,11 +31,11 @@ defmodule EventAppWeb.Telemetry do
       ),
 
       # Database Metrics
-      summary("event_app.repo.query.total_time", unit: {:native, :millisecond}),
-      summary("event_app.repo.query.decode_time", unit: {:native, :millisecond}),
-      summary("event_app.repo.query.query_time", unit: {:native, :millisecond}),
-      summary("event_app.repo.query.queue_time", unit: {:native, :millisecond}),
-      summary("event_app.repo.query.idle_time", unit: {:native, :millisecond}),
+      summary("spa_event_app.repo.query.total_time", unit: {:native, :millisecond}),
+      summary("spa_event_app.repo.query.decode_time", unit: {:native, :millisecond}),
+      summary("spa_event_app.repo.query.query_time", unit: {:native, :millisecond}),
+      summary("spa_event_app.repo.query.queue_time", unit: {:native, :millisecond}),
+      summary("spa_event_app.repo.query.idle_time", unit: {:native, :millisecond}),
 
       # VM Metrics
       summary("vm.memory.total", unit: {:byte, :kilobyte}),
@@ -49,7 +49,7 @@ defmodule EventAppWeb.Telemetry do
     [
       # A module, function and arguments to be invoked periodically.
       # This function must call :telemetry.execute/3 and a metric must be added above.
-      # {EventAppWeb, :count_users, []}
+      # {SpaEventAppWeb, :count_users, []}
     ]
   end
 end

@@ -1,4 +1,4 @@
-# EventApp
+# SpaEventApp
 
 To start your Phoenix server:
 

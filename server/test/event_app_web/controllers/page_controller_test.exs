@@ -1,5 +1,5 @@
-defmodule EventAppWeb.PageControllerTest do
-  use EventAppWeb.ConnCase
+defmodule SpaEventAppWeb.PageControllerTest do
+  use SpaEventAppWeb.ConnCase
 
   test "GET /", %{conn: conn} do
     conn = get(conn, "/")
