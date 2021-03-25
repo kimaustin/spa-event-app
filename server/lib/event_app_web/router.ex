@@ -16,9 +16,9 @@ defmodule SpaEventAppWeb.Router do
   scope "/api/v1", SpaEventAppWeb do
     pipe_through :api
 
-    get "/", PageController, :index
-    get "/users/photo/:id", UserController, :photo
-    get "/events/photo/:id", EventController, :photo
+    # get "/", PageController, :index
+    # get "/users/photo/:id", UserController, :photo
+    # get "/events/photo/:id", EventController, :photo
 
     resources "/users", UserController
     resources "/events", EventController
