@@ -13,6 +13,11 @@ defmodule SpaEventAppWeb.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/", SpaEventAppWeb do
+    get "/", PageController, :index
+    get "/photos/:hash", PageController, :photo
+  end
+
   scope "/api/v1", SpaEventAppWeb do
     pipe_through :api
 
@@ -24,6 +29,7 @@ defmodule SpaEventAppWeb.Router do
     resources "/events", EventController
     resources "/comments", CommentController
     resources "/invitations", InvitationController
+    resources "/session", SessionController, only: [:create]
   end
 
   # Other scopes may use custom stacks.
