@@ -36,7 +36,7 @@ config :spa_event_app, SpaEventAppWeb.Endpoint,
   secret_key_base: secret_key_base
 
 config :cors_plug,
-  origin: ["http://events-spa.wbdbvaustinkim.com:3000"],
+  origin: ["http://events-spa.wbdbvaustinkim.com:80"],
   max_age: 86400,
   methods: ["GET", "POST", "PATCH", "DELETE"]
 

@@ -2,7 +2,7 @@ import { Row, Col, Card } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 function photo_path(event) {
-  return "http://198.199.89.228:4000/photos/" + event.photo_hash;
+  return "http://events-spa.wbdbvaustinkim.com:80/photos/" + event.photo_hash;
 }
 
 function Event({event}) {
