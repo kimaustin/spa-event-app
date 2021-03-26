@@ -1,7 +1,7 @@
 import store from './store';
 
 async function api_get(path) {
-  let text = await fetch("http://localhost:4000/api/v1" + path, {});
+  let text = await fetch("http://198.199.89.228:4000/api/v1" + path, {});
   let resp = await text.json();
   return resp.data;
 }

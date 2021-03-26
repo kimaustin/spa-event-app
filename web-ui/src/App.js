@@ -10,14 +10,16 @@ function App() {
   return (
     <Container>
       <Nav />
-      <Switch>
-        <Route path="/" exact>
-          <Feed />
-        </Route>
-        <Route path="/users">
-          <Users />
-        </Route>
-      </Switch>
+      {/* <BrowserRouter> */}
+        <Switch>
+          <Route path="/" exact>
+            <Feed />
+          </Route>
+          <Route path="/users">
+            <Users />
+          </Route>
+        </Switch>
+      {/* </BrowserRouter> */}
     </Container>
   );
 }

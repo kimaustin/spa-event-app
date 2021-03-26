@@ -14,7 +14,7 @@ function Link({to, children}) {
 export default function AppNav() {
   return (
     <Nav variant="pills">
-      <Link to="/">Feed</Link>
+      <Link to="/">Events</Link>
       <Link to="/users">Users</Link>
     </Nav>
   );
