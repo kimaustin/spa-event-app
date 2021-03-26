@@ -36,7 +36,7 @@ function UserForm({user, setUser}) {
 
 function Users({users, user_form, dispatch}) {
   // No useState
-  function setUser(user) {
+  function setUser(user) {  
     dispatch({type: 'user_form/set', data: user});
   }
   
