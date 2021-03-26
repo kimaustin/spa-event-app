@@ -1,0 +1,9 @@
+[Unit]
+Description=Event App as SPA
+
+[Service]
+WorkingDirectory=/home/hw07/spa_event_app/web-ui
+ExecStart=/usr/local/bin/serve -s build -l 5030
+
+[Install]
+WantedBy=multi-user.target
