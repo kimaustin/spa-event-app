@@ -1,3 +1,8 @@
+// Most of the code below was taken from 
+// https://github.com/NatTuck/scratch-2021-01/tree/master/4550/0319
+
+
+
 import { connect } from 'react-redux';
 import { Row, Col, Form, Button } from 'react-bootstrap';
 import capitalize from 'lodash/capitalize';
