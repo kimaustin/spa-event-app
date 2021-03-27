@@ -13,6 +13,7 @@
 alias SpaEventApp.Repo
 alias SpaEventApp.Users.User
 alias SpaEventApp.Events.Event
+alias SpaEventApp.Invitations.Invitation
 alias SpaEventApp.Photos
 
 defmodule Inject do
@@ -38,3 +39,5 @@ bob = Inject.user("bob", "bob@mail", defaultuser, "bobword")
 
 Repo.insert!(%Event{user_id: alice.id, photo_hash: elephant, title: "Alice's Event", date: "March 10 2021", desc: "Alice's first event."})
 Repo.insert!(%Event{user_id: bob.id, photo_hash: moon, title: "Bob's Event", date: "March 12 2021", desc: "Bob's first event."})
+
+Repo.insert!(%Invitation{email: bob.email, response: "no", event_id: 1, user_id: alice.id})

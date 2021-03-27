@@ -19,6 +19,8 @@ defmodule SpaEventApp.Invitations do
   """
   def list_invitations do
     Repo.all(Invitation)
+    |> Repo.preload(:user)
+    |> Repo.preload(:event)
   end
 
   @doc """
@@ -52,9 +54,7 @@ defmodule SpaEventApp.Invitations do
   def create_invitation(attrs \\ %{}) do
     %Invitation{}
     |> Invitation.changeset(attrs)
-    |> Repo.insert(
-      on_conflict: :replace_all,
-      conflict_target: [:event_id, :user_id])
+    |> Repo.insert()
   end
 
   @doc """

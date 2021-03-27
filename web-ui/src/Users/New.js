@@ -85,7 +85,7 @@ function UsersNew() {
         </Form.Group>
         <Button variant="primary" type="submit"
                 disabled={user.pass_msg !== ""}>
-            Save
+            Create User
         </Button>
         </Form>
       </Col>

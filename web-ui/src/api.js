@@ -53,15 +53,15 @@ export function fetch_events() {
 //   });
 // }
 
-// export function fetch_invitations() {
-//   api_get("/invitations").then((data) => {
-//     let action = {
-//       type: 'invitations/set',
-//       data: data,
-//     }
-//     store.dispatch(action);
-//   });
-// }
+export function fetch_invitations() {
+  api_get("/invitations").then((data) => {
+    let action = {
+      type: 'invitations/set',
+      data: data,
+    }
+    store.dispatch(action);
+  });
+}
 
 export function api_login(name, password) {
   api_post("/session", {name, password}).then((data) => {
@@ -115,8 +115,29 @@ export async function create_event(event) {
   return await text.json();
 }
 
+export async function create_invitation(invitation) {
+  let state = store.getState();
+  let token = state?.session?.token;
+
+  let data = new FormData();
+  data.append("invitation[email]", invitation.email);
+  data.append("invitation[response]", invitation.response);
+  data.append("invitation[event_id]", invitation.event_id);
+  data.append("invitation[user_id]", invitation.user_id);
+  let opts = {
+    method: 'POST',
+    body: data,
+    headers: {
+      'x-auth': token,
+    },
+  };
+  let text = await fetch(
+    "http://events-spa.wbdbvaustinkim.com:80/api/v1/invitations", opts);
+  return await text.json();
+}
+
 export function load_defaults() {
   fetch_events();
   fetch_users();
-  // fetch_invitations();
+  fetch_invitations();
 }

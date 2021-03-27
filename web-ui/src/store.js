@@ -19,14 +19,14 @@ function users(state = [], action) {
   }
 }
 
-function user_form(state = {}, action) {
-  switch (action.type) {
-    case 'user_form/set':
-      return action.data;
-    default:
-      return state;
-  }
-}
+// function user_form(state = {}, action) {
+//   switch (action.type) {
+//     case 'user_form/set':
+//       return action.data;
+//     default:
+//       return state;
+//   }
+// }
 
 function events(state = [], action) {
   switch (action.type) {
@@ -37,7 +37,14 @@ function events(state = [], action) {
   }
 }
 
-
+function invitations(state = [], action) {
+    switch (action.type) {
+      case 'invitations/set':
+        return action.data;
+      default:
+        return state;
+    }
+  }
 
 function save_session(sess) {
   let session = Object.assign({}, sess, {time: Date.now()});
@@ -99,7 +106,7 @@ function root_reducer(state, action) {
     }
   */
   let redu = combineReducers(
-    {users, user_form, events, session, error}
+    {users, events, invitations, session, error}
   );
 
   let state1 = redu(state, action);

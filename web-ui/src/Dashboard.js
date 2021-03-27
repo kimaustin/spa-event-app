@@ -44,22 +44,26 @@ function Event({event}) {
 // belongs_to .event -> SpaEventApp.Events.Event
 // belongs_to .user -> SpaEventApp.Users.User
 
-// function Invitation({invitation}) {
-//   return (
-//     <Col md="3">
-//       <Card>
-//         <Card.Text>
-//           {/* {invitation.event.name}<br /> */}
-//           Your Response: {invitation.response}
-//         </Card.Text>
-//       </Card>
-//     </Col>
-//   );
-// }
+function Invitation({invitation}) {
+  return (
+    <Col md="3">
+      <Card>
+        <Card.Text>
+          {/* You're invited to: {invitation.event.title}<br /> */}
+          Your Response: {invitation.response}
+        </Card.Text>
+      </Card>
+    </Col>
+  );
+}
 
-function Dashboard({events, session}) {
+function Dashboard({events, invitations, session}) {
   let event_cards = events.map((event) => (
     <Event event={event} key={event.id} />
+  ));
+
+  let inv_cards = invitations.map((invitation) => (
+    <Invitation invitation={invitation} key={invitation.id} />
   ));
 
   let new_link = null;
@@ -72,13 +76,16 @@ function Dashboard({events, session}) {
   return (
     <div>
       <h2>Dashboard</h2>
-      { new_link }
-      <h3>Events</h3>
-      <Row>{event_cards}</Row>
       <h3>Invitations</h3>
+      <Row>{inv_cards}</Row>
+      
+      <h3>Events</h3>
+      { new_link }
+      <Row>{event_cards}</Row>
+      
     </div>
   );
 }
 
 export default connect(
-  ({events, session}) => ({events, session}))(Dashboard);
+  ({events, invitations, session}) => ({events, invitations, session}))(Dashboard);

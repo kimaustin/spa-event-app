@@ -34,7 +34,7 @@ function App() {
           <UsersNew />
         </Route>
         <Route path="/events/:eventId?">
-          <EventsSingle event_id={"1"} />
+          <EventsSingle />
         </Route>
       </Switch>
     </Container>
