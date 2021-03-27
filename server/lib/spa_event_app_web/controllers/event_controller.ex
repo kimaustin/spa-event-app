@@ -20,10 +20,11 @@ defmodule SpaEventAppWeb.EventController do
       |> Map.put("photo_hash", hash)
 
     with {:ok, %Event{} = event} <- Events.create_event(event_params) do
+      loaded_event = Events.get_event!(event.id)
       conn
       |> put_status(:created)
       |> put_resp_header("location", Routes.event_path(conn, :show, event))
-      |> render("show.json", event: event)
+      |> render("show.json", event: loaded_event)
     end
   end
 

@@ -1,4 +1,4 @@
-// Most of the code below was taken from 
+// Most of the code below was taken from
 // https://github.com/NatTuck/scratch-2021-01/tree/master/4550/0319
 
 import { connect } from 'react-redux';
@@ -49,10 +49,10 @@ function EventForm({event, setEvent}) {
 
 function Events({events, event_form, dispatch}) {
   // No useState
-  function setEvent(event) {  
+  function setEvent(event) {
     dispatch({type: 'event_form/set', data: event});
   }
-  
+
   let rows = events.map((event) => (
     <tr key={event.id}>
       <td>{event.title}</td>

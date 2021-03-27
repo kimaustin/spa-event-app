@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 import store from '../store';
 
 
-function UsersList({users}) {
+function UsersList({users, session}) {
 
-    // function setUser(user) {  
+    // function setUser(user) {
     //     dispatch({type: 'user_form/set', data: user});
     // }
 
@@ -20,36 +20,59 @@ function UsersList({users}) {
     </tr>
   ));
 
-  return (
-    <div>
-      <Row>
-        <Col>
-          <h2>List Users</h2>
-          <p>
-            <Link to="/users/new">
-                <Button variant="primary">New User</Button>
-            </Link>
-          </p>
-          <table className="table table-striped">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              { rows }
-            </tbody>
-          </table>
-        </Col>
-      </Row>
-    </div>
-  );
-
+  if (session != null) {
+    return (
+      <div>
+        <Row>
+          <Col>
+            <h2>List Users</h2>
+            <p>
+              <Link to="/users/new">
+                  <Button variant="primary">New User</Button>
+              </Link>
+            </p>
+            <table className="table table-striped">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                { rows }
+              </tbody>
+            </table>
+          </Col>
+        </Row>
+      </div>
+    );
+  }
+  else {
+    return (
+      <div>
+        <Row>
+          <Col>
+            <h2>List Users</h2>
+            <table className="table table-striped">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                { rows }
+              </tbody>
+            </table>
+          </Col>
+        </Row>
+      </div>
+    );
+  }
 }
 
-function state2props({users}) {
-  return { users };
+function state2props({users, session}) {
+  return { users, session };
 }
 
 export default connect(state2props)(UsersList);

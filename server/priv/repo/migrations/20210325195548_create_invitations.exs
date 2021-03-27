@@ -11,7 +11,6 @@ defmodule SpaEventApp.Repo.Migrations.CreateInvitations do
       timestamps()
     end
 
-    create index(:invitations, [:event_id])
-    create index(:invitations, [:user_id])
+    create index(:invitations, [:event_id, :user_id])
   end
 end

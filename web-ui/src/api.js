@@ -1,4 +1,4 @@
-// Most of the code below was taken from 
+// Most of the code below was taken from
 // https://github.com/NatTuck/scratch-2021-01/tree/master/4550/0323
 
 import store from './store';
@@ -135,6 +135,29 @@ export async function create_invitation(invitation) {
     "http://events-spa.wbdbvaustinkim.com:80/api/v1/invitations", opts);
   return await text.json();
 }
+
+export async function update_invitation(invitation) {
+  let state = store.getState();
+  let token = state?.session?.token;
+
+  let data = new FormData();
+  data.append("invitation[id]", invitation.id);
+  data.append("invitation[email]", invitation.email);
+  data.append("invitation[response]", invitation.response);
+  data.append("invitation[event_id]", invitation.event.id);
+  data.append("invitation[user_id]", invitation.user.id);
+  let opts = {
+    method: 'PUT',
+    body: data,
+    headers: {
+      'x-auth': token
+    },
+  };
+  let text = await fetch(
+    "http://events-spa.wbdbvaustinkim.com:80/api/v1/invitations/" + invitation.id, opts);
+  return await text.json();
+}
+
 
 export function load_defaults() {
   fetch_events();

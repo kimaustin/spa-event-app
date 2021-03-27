@@ -1,8 +1,10 @@
 defmodule SpaEventAppWeb.InvitationController do
   use SpaEventAppWeb, :controller
+  import Logger
 
   alias SpaEventApp.Invitations
   alias SpaEventApp.Invitations.Invitation
+  alias SpaEventApp.Users
 
   action_fallback SpaEventAppWeb.FallbackController
 
@@ -12,11 +14,31 @@ defmodule SpaEventAppWeb.InvitationController do
   end
 
   def create(conn, %{"invitation" => invitation_params}) do
-    with {:ok, %Invitation{} = invitation} <- Invitations.create_invitation(invitation_params) do
-      conn
-      |> put_status(:created)
-      |> put_resp_header("location", Routes.invitation_path(conn, :show, invitation))
-      |> render("show.json", invitation: invitation)
+    Logger.info("Creating invitation...")
+    user = Users.get_user_by_email(invitation_params["email"])
+    if user do
+      invitation_params = invitation_params
+        |> Map.put("user_id", user.id)
+      with {:ok, %Invitation{} = invitation} <- Invitations.create_invitation(invitation_params) do
+        loaded_invitation = Invitations.get_invitation!(invitation.id)
+        Logger.info("Invitation loaded")
+        conn
+        |> put_status(:created)
+        |> put_resp_header("location", Routes.invitation_path(conn, :show, invitation))
+        |> render("show.json", invitation: loaded_invitation)
+      end
+    else
+        invitation_params = invitation_params
+          |> Map.delete("user_id")
+        Logger.info("No user found for the invitation")
+        with {:ok, %Invitation{} = invitation} <- Invitations.create_invitation(invitation_params) do
+          loaded_invitation = Invitations.get_invitation!(invitation.id)
+          Logger.info("Invitation loaded")
+          conn
+          |> put_status(:created)
+          |> put_resp_header("location", Routes.invitation_path(conn, :show, invitation))
+          |> render("show.json", invitation: loaded_invitation)
+        end
     end
   end
 

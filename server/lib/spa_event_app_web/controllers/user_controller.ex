@@ -1,6 +1,6 @@
 defmodule SpaEventAppWeb.UserController do
   use SpaEventAppWeb, :controller
-
+  import Logger
   alias SpaEventApp.Users
   alias SpaEventApp.Users.User
 
@@ -13,6 +13,9 @@ defmodule SpaEventAppWeb.UserController do
 
   def create(conn, %{"user" => user_params}) do
     with {:ok, %User{} = user} <- Users.create_user(user_params) do
+      Logger.info("User added. updating invitations...")
+      Users.update_invitations(user_params["email"], user.id)
+      Logger.info("Updated invitations. Rederning...")
       conn
       |> put_status(:created)
       |> put_resp_header("location", Routes.user_path(conn, :show, user))

@@ -8,6 +8,7 @@ defmodule SpaEventApp.Users do
 
   alias SpaEventApp.Repo
 
+  alias SpaEventApp.Invitations.Invitation
   alias SpaEventApp.Users.User
 
   @doc """
@@ -39,6 +40,10 @@ defmodule SpaEventApp.Users do
   """
   def get_user!(id), do: Repo.get!(User, id)
 
+  def get_user_by_email(email) do
+    Repo.get_by(User, email: email)
+  end
+
   @doc """
   Creates a user.
 
@@ -55,6 +60,15 @@ defmodule SpaEventApp.Users do
     %User{}
     |> User.changeset(attrs)
     |> Repo.insert()
+  end
+
+  def update_invitations(email, user_id) do
+    Repo.all(Invitation)
+      |> Enum.each(fn x ->
+        if !x.user_id && x.email == email do
+          Repo.update(Invitation.changeset(x, %{"user_id" => user_id}))
+        end
+      end)
   end
 
   @doc """

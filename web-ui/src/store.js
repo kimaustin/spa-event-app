@@ -1,4 +1,4 @@
-// Most of the code below was taken from 
+// Most of the code below was taken from
 // https://github.com/NatTuck/scratch-2021-01/tree/master/4550/0323
 
 import { createStore, combineReducers } from 'redux';
@@ -43,8 +43,8 @@ function invitations(state = [], action) {
         return action.data;
       default:
         return state;
-    }
   }
+}
 
 function save_session(sess) {
   let session = Object.assign({}, sess, {time: Date.now()});

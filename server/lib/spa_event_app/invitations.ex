@@ -37,7 +37,12 @@ defmodule SpaEventApp.Invitations do
       ** (Ecto.NoResultsError)
 
   """
-  def get_invitation!(id), do: Repo.get!(Invitation, id)
+  def get_invitation!(id) do
+    Repo.get!(Invitation, id)
+    |> Repo.preload(:user)
+    |> Repo.preload(:event)
+  end
+
 
   @doc """
   Creates a invitation.

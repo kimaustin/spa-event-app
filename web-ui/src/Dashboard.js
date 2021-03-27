@@ -1,4 +1,4 @@
-// Most of the code below was taken from 
+// Most of the code below was taken from
 // https://github.com/NatTuck/scratch-2021-01/tree/master/4550/0323
 
 import { Row, Col, Card, Button } from 'react-bootstrap';
@@ -28,7 +28,7 @@ function Event({event}) {
         <Card.Text>
           Posted by {event.user.name}<br />
           {event.date}<br />
-          {event.desc} 
+          {event.desc}
         </Card.Text>
         <Link to={{pathname: `/events/` + event.id}}>
           <Button variant="primary">View Event</Button>
@@ -49,9 +49,12 @@ function Invitation({invitation}) {
     <Col md="3">
       <Card>
         <Card.Text>
-          {/* You're invited to: {invitation.event.title}<br /> */}
+          You're invited to: {invitation.event.title}<br />
           Your Response: {invitation.response}
         </Card.Text>
+        <Link to={{pathname: `/invitation/` + invitation.id}}>
+          <Button variant="primary">Edit Response</Button>
+        </Link>
       </Card>
     </Col>
   );
@@ -62,7 +65,9 @@ function Dashboard({events, invitations, session}) {
     <Event event={event} key={event.id} />
   ));
 
-  let inv_cards = invitations.map((invitation) => (
+  let eventInvitations = invitations.filter( (invitation) => session && session.user_id === invitation.user_id);
+
+  let inv_cards = eventInvitations.map((invitation) => (
     <Invitation invitation={invitation} key={invitation.id} />
   ));
 
@@ -76,13 +81,15 @@ function Dashboard({events, invitations, session}) {
   return (
     <div>
       <h2>Dashboard</h2>
-      <h3>Invitations</h3>
-      <Row>{inv_cards}</Row>
-      
-      <h3>Events</h3>
-      { new_link }
-      <Row>{event_cards}</Row>
-      
+      <div>
+        <h3>Events</h3>
+        { new_link }
+        <Row>{event_cards}</Row>
+      </div>
+      <div style={{'paddingTop': '30px'}}>
+        <h3>Invitations</h3>
+        <Row>{inv_cards}</Row>
+      </div>
     </div>
   );
 }

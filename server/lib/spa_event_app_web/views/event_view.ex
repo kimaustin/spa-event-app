@@ -20,4 +20,12 @@ defmodule SpaEventAppWeb.EventView do
       user: render_one(event.user, UserView, "user.json")}
   end
 
+  def render("event_shallow.json", %{event: event}) do
+    %{id: event.id,
+      date: event.date,
+      desc: event.desc,
+      title: event.title,
+      photo_hash: event.photo_hash,
+      user_id: event.user_id}
+  end
 end
