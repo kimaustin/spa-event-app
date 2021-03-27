@@ -8,29 +8,35 @@ import "./App.scss";
 import UsersList from "./Users/List";
 import UsersNew from "./Users/New";
 import EventsNew from "./Events/New";
+import EventsList from "./Events/List";
 import Nav from "./Nav";
-import Feed from "./Feed";
+import Dashboard from "./Dashboard";
+import EventsSingle from "./Events/Single";
 
 function App() {
   return (
     <Container>
       <Nav />
-      {/* <BrowserRouter> */}
-        <Switch>
-          <Route path="/" exact>
-            <Feed />
-          </Route>
-          <Route path="/events/new" exact>
-            <EventsNew />
-          </Route>
-          <Route path="/users">
-            <UsersList />
-          </Route>
-          <Route path="/users/new" exact>
-            <UsersNew />
-          </Route>
-        </Switch>
-      {/* </BrowserRouter> */}
+      <Switch>
+        <Route exact path="/">
+          <Dashboard />
+        </Route>
+        <Route exact path="/events">
+          <EventsList />
+        </Route>
+        <Route path="/events/new">
+          <EventsNew />
+        </Route>
+        <Route exact path="/users">
+          <UsersList />
+        </Route>
+        <Route path="/users/new">
+          <UsersNew />
+        </Route>
+        <Route path="/events/:eventId?">
+          <EventsSingle event_id={"1"} />
+        </Route>
+      </Switch>
     </Container>
   );
 }

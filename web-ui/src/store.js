@@ -37,9 +37,15 @@ function events(state = [], action) {
   }
 }
 
+
+
 function save_session(sess) {
   let session = Object.assign({}, sess, {time: Date.now()});
   localStorage.setItem("session", JSON.stringify(session));
+}
+
+function clear_session() {
+    localStorage.removeItem("session");
 }
 
 function load_session() {
@@ -64,6 +70,7 @@ function session(state = load_session(), action) {
     save_session(action.data);
     return action.data;
   case 'session/clear':
+    clear_session();
     return null;
   default:
     return state;
@@ -80,6 +87,7 @@ function error(state = null, action) {
     return state;
   }
 }
+
 
 function root_reducer(state, action) {
   console.log("root reducer", state, action);

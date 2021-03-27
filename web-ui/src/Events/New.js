@@ -2,9 +2,8 @@
 // https://github.com/NatTuck/scratch-2021-01/tree/master/4550/0323
 
 import { Row, Col, Form, Button } from 'react-bootstrap';
-import { useState } from 'react';
+import { useState } from 'react'
 import { useHistory } from 'react-router-dom';
-
 import { create_event, fetch_events } from '../api';
 
 export default function EventsNew() {
@@ -25,11 +24,6 @@ export default function EventsNew() {
       }
     });
   }
-
-  // field :date, :string
-  // field :desc, :string
-  // field :photo_hash, :string
-  // field :title, :string
 
   function updateDate(ev) {
     let e1 = Object.assign({}, event);
@@ -54,12 +48,12 @@ export default function EventsNew() {
     e1["title"] = ev.target.value;
     setEvent(e1);
   }
-  
 
+  // Note: File input can't be a controlled input.
   return (
     <Row>
       <Col>
-        <h2>New Post</h2>
+        <h2>New Event</h2>
         <Form onSubmit={submit}>
           <Form.Group>
             <Form.Label>Title</Form.Label>
@@ -88,7 +82,7 @@ export default function EventsNew() {
                           value={event.desc} />
           </Form.Group>
           <Button variant="primary" type="submit">
-            Event!
+            Create Event
           </Button>
         </Form>
       </Col>

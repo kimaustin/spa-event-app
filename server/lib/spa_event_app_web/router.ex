@@ -31,7 +31,7 @@ defmodule SpaEventAppWeb.Router do
     resources "/events", EventController
     resources "/comments", CommentController
     resources "/invitations", InvitationController
-    resources "/session", SessionController, only: [:create]
+    resources "/session", SessionController, only: [:create, :delete]
   end
 
   # Other scopes may use custom stacks.

@@ -1,59 +1,22 @@
-// Most of the code below was taken from 
-// https://github.com/NatTuck/scratch-2021-01/tree/master/4550/0319
-
-
-
+import { Row, Col, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { Row, Col, Form, Button } from 'react-bootstrap';
-import capitalize from 'lodash/capitalize';
+import { Link } from 'react-router-dom';
+import store from '../store';
 
-function Field({user, setUser, field}) {
-  function update(ev) {
-    let tmp = Object.assign({}, user);
-    tmp[field] = ev.target.value;
-    setUser(tmp);
-  }
 
-  return (
-    <Form.Group>
-      <Form.Label>{capitalize(field)}</Form.Label>
-      <Form.Control type="text" onChange={update} value={user[field]||""} />
-    </Form.Group>
-  );
-}
+function UsersList({users}) {
 
-function UserForm({user, setUser}) {
-  function onSubmit(ev) {
-    ev.preventDefault();
-    console.log(ev);
-    console.log(user);
-  }
+    // function setUser(user) {  
+    //     dispatch({type: 'user_form/set', data: user});
+    // }
 
-  return (
-    <Form onSubmit={onSubmit}>
-      <Field user={user} setUser={setUser} field="name" />
-      <Button variant="primary" type="submit">
-        Save
-      </Button>
-    </Form>
-  );
-}
-
-function Users({users, user_form, dispatch}) {
-  // No useState
-  function setUser(user) {  
-    dispatch({type: 'user_form/set', data: user});
-  }
-  
   let rows = users.map((user) => (
     <tr key={user.id}>
       <td>{user.name}</td>
-      <td>
-        <Button variant="secondary"
+      {/* <td><Button variant="secondary"
                 onClick={() => setUser(user)}>
           Edit
-        </Button>
-      </td>
+        </Button></td> */}
     </tr>
   ));
 
@@ -63,10 +26,9 @@ function Users({users, user_form, dispatch}) {
         <Col>
           <h2>List Users</h2>
           <p>
-            <Button variant="secondary"
-                    onClick={() => setUser({})}>
-              New User
-            </Button>
+            <Link to="/users/new">
+                <Button variant="primary">New User</Button>
+            </Link>
           </p>
           <table className="table table-striped">
             <thead>
@@ -81,14 +43,13 @@ function Users({users, user_form, dispatch}) {
           </table>
         </Col>
       </Row>
-      <Row>
-        <Col>
-          <h2>Edit User</h2>
-          <UserForm user={user_form} setUser={setUser} />
-        </Col>
-      </Row>
     </div>
   );
+
 }
 
-export default connect(({users, user_form}) => ({users, user_form}))(Users);
+function state2props({users}) {
+  return { users };
+}
+
+export default connect(state2props)(UsersList);

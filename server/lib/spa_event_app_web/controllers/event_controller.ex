@@ -3,6 +3,7 @@ defmodule SpaEventAppWeb.EventController do
 
   alias SpaEventApp.Events
   alias SpaEventApp.Events.Event
+  alias SpaEventApp.Photos
 
   action_fallback SpaEventAppWeb.FallbackController
 
@@ -12,6 +13,12 @@ defmodule SpaEventAppWeb.EventController do
   end
 
   def create(conn, %{"event" => event_params}) do
+    up = event_params["photo"]
+    {:ok, hash} = Photos.save_photo(up.filename, up.path)
+
+    event_params = event_params
+      |> Map.put("photo_hash", hash)
+
     with {:ok, %Event{} = event} <- Events.create_event(event_params) do
       conn
       |> put_status(:created)
